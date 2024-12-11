@@ -55,6 +55,7 @@
         <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm container">
 
             @yield('admin_dashboard')
+            @yield('customer_section')
             <!-- End Page-content -->
 
             @include('backend.layouts.inc.footer')
