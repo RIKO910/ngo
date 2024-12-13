@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class CustomerListController extends Controller
@@ -11,7 +12,9 @@ class CustomerListController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.customer');
+        $employees = Employee::all();
+
+        return view('backend.pages.customer', compact('employees'));
     }
 
     /**
@@ -27,7 +30,19 @@ class CustomerListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'role' => 'required',
+            'email' => 'required|email|unique:employees,email',
+            'phone' => 'required',
+            'country' => 'required',
+            'experience' => 'required',
+            'join_date' => 'required|date',
+        ]);
+
+        Employee::create($request->all());
+
+        return response()->json(['success' => 'Employee added successfully!']);
     }
 
     /**
@@ -49,16 +64,30 @@ class CustomerListController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Employee $employee)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'role' => 'required',
+            'email' => 'required|email|unique:employees,email,' . $employee->id,
+            'phone' => 'required',
+            'country' => 'required',
+            'experience' => 'required',
+            'join_date' => 'required|date',
+        ]);
+
+        $employee->update($request->all());
+
+        return response()->json(['success' => 'Employee updated successfully!']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return response()->json(['success' => 'Employee deleted successfully!']);
     }
 }
