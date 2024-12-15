@@ -14,7 +14,7 @@ class CustomerListController extends Controller
     {
         $employees = Employee::all();
 
-        return view('backend.pages.customer', compact('employees'));
+        return view('backend.pages.employee', compact('employees'));
     }
 
     /**
@@ -37,7 +37,7 @@ class CustomerListController extends Controller
             'phone' => 'required',
             'country' => 'required',
             'experience' => 'required',
-            'join_date' => 'required|date',
+            'join_date' => 'required',
         ]);
 
         Employee::create($request->all());

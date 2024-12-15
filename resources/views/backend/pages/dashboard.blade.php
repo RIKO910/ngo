@@ -29,7 +29,7 @@
                         <div class="flex items-center justify-center bg-green-500 rounded-md size-12 text-15 text-green-50">
                             <i data-lucide="users"></i>
                         </div>
-                        <h5 class="mt-5 mb-2"><span class="counter-value" data-target="15876">0</span></h5>
+                        <h5 class="mt-5 mb-2"><span >{{ count($employees) }}</span></h5>
                         <p class="text-slate-500 dark:text-slate-200">Total Users</p>
                     </div>
                 </div><!--end col-->
