@@ -41,8 +41,10 @@ class CustomerListController extends Controller
         ]);
 
         Employee::create($request->all());
+        return redirect()->route('employees.index');
 
-        return response()->json(['success' => 'Employee added successfully!']);
+
+//        return response()->json(['success' => 'Employee added successfully!']);
     }
 
     /**
@@ -88,6 +90,8 @@ class CustomerListController extends Controller
     {
         $employee->delete();
 
-        return response()->json(['success' => 'Employee deleted successfully!']);
+        return redirect()->route('employees.index');
+
+//        return response()->json(['success' => 'Employee deleted successfully!']);
     }
 }

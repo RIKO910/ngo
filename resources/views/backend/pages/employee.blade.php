@@ -11,14 +11,14 @@
 
             <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center print:hidden">
                 <div class="grow">
-                    <h5 class="text-16">People List</h5>
+                    <h5 class="text-16">Customer List</h5>
                 </div>
                 <ul class="flex items-center gap-2 text-sm font-normal shrink-0">
                     <li class="relative before:content-['\ea54'] before:font-remix ltr:before:-right-1 rtl:before:-left-1  before:absolute before:text-[18px] before:-top-[3px] ltr:pr-4 rtl:pl-4 before:text-slate-400 dark:text-zink-200">
                         <a href="#!" class="text-slate-400 dark:text-zink-200">Admin Management</a>
                     </li>
                     <li class="text-slate-700 dark:text-zink-100">
-                        People List
+                        Customer List
                     </li>
                 </ul>
             </div>
@@ -27,7 +27,7 @@
                     <div class="flex items-center gap-3 mb-4">
                         <h6 class="text-15 grow">People (<b class="total-Employs">{{ count($employees) }} </b>)</h6>
                         <div class="shrink-0">
-                            <a href="#!" data-modal-target="addEmployeeModal" type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-employee"><i data-lucide="plus" class="inline-block size-4"></i> <span class="align-middle">Add People</span></a>
+                            <a href="#!" data-modal-target="addEmployeeModal" type="button" class="text-white btn bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 add-employee"><i data-lucide="plus" class="inline-block size-4"></i> <span class="align-middle">Add Customer</span></a>
                         </div>
                     </div>
 
@@ -36,12 +36,12 @@
                             <thead class="ltr:text-left rtl:text-right">
                             <tr class="bg-slate-100 dark:bg-zink-600">
 {{--                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 ID">Employee ID</th>--}}
-                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Name">Name</th>
+                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Name">Customer Name</th>
                                 <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Role">Role</th>
-                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Email">Email Id</th>
+                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Email">Email</th>
                                 <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Phone">Phone Number</th>
-                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Country">Location</th>
-                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Experience">Experience</th>
+                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Country">Address</th>
+                                <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Experience">Profession</th>
                                 <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 JoinDate">Joining Date</th>
                                 <th class="px-3.5 py-2.5 first:pl-5 last:pr-5 font-semibold border-b border-slate-200 dark:border-zink-500 Action">Action</th>
                             </tr>
@@ -67,7 +67,12 @@
                                     <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 JoinDate">{{ $employee->join_date }}</td>
                                     <td class="px-3.5 py-2.5 first:pl-5 last:pr-5 border-y border-slate-200 dark:border-zink-500 Action">
                                         <div class="flex gap-3">
-                                            <button class="btn btn-danger delete-btn" data-id="{{ $employee->id }}">Delete</button>
+                                            <form action="{{ route( 'employees.destroy',['employee'=>$employee->id ] )}}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button href="" type="submit" class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 remove-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"><i data-lucide="trash-2" class="size-4"></i></button>
+                                            </form>
+{{--                                            <button class="btn btn-danger delete-btn" data-id="{{ $employee->id }}">Delete</button>--}}
 
                                             {{--                                            <a class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500" href="pages-account.html"><i data-lucide="eye" class="inline-block size-3"></i> </a>--}}
 {{--                                            <a href="#!" data-modal-target="addEmployeeModal" class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 edit-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"><i data-lucide="pencil" class="size-4"></i></a>--}}
@@ -138,7 +143,7 @@
                             <input type="text" id="employeeId" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" value="" disabled>
                         </div>
                         <div class="xl:col-span-12">
-                            <label for="employeeInput" class="inline-block mb-2 text-base font-medium">Name</label>
+                            <label for="employeeInput" class="inline-block mb-2 text-base font-medium">Customer Name</label>
                             <input type="text" id="employeeInput" name="name" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Employee name">
                         </div>
 {{--                        <div class="xl:col-span-12">--}}
@@ -154,7 +159,7 @@
                             <input type="text" id="phoneNumberInput" name="phone" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter phone number" required>
                         </div>
                         <div class="xl:col-span-6">
-                            <label for="locationInput" class="inline-block mb-2 text-base font-medium">Location</label>
+                            <label for="locationInput" class="inline-block mb-2 text-base font-medium">Address</label>
                             <input type="text" id="locationInput" name="country" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Enter location" required>
                         </div>
                         <div class="xl:col-span-6">
@@ -162,8 +167,8 @@
                             <input type="date" id="joiningDateInput" name="join_date" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="Select date" data-provider="flatpickr" data-date-format="d M, Y">
                         </div>
                         <div class="xl:col-span-6">
-                            <label for="experienceInput" class="inline-block mb-2 text-base font-medium">Experience</label>
-                            <input type="text" id="experienceInput" name="experience" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="0.0" required>
+                            <label for="experienceInput" class="inline-block mb-2 text-base font-medium">Profession</label>
+                            <input type="text" id="experienceInput" name="experience" class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200" placeholder="army" required>
                         </div>
                         <div class="xl:col-span-12">
                             <label for="designationSelect" class="inline-block mb-2 text-base font-medium">Role</label>
@@ -263,30 +268,30 @@
         });
 
 
-        // Open Delete Modal
-        let employeeIdToDelete;
-        $('.delete-btn').on('click', function () {
-            employeeIdToDelete = $(this).data('id');
-            $('#deleteEmployeeModal').modal('show');
-        });
+        {{--// Open Delete Modal--}}
+        {{--let employeeIdToDelete;--}}
+        {{--$('.delete-btn').on('click', function () {--}}
+        {{--    employeeIdToDelete = $(this).data('id');--}}
+        {{--    $('#deleteEmployeeModal').modal('show');--}}
+        {{--});--}}
 
-        // Confirm Delete
-        $('#confirmDelete').on('click', function () {
-            $.ajax({
-                url: `/employees/${employeeIdToDelete}`, // Replace with your actual route
-                method: 'DELETE',
-                data: {
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function (response) {
-                    alert(response.success);
-                    location.reload(); // Reload to update the table
-                },
-                error: function (xhr) {
-                    alert('Error: ' + xhr.responseJSON.message);
-                }
-            });
-        });
+        {{--// Confirm Delete--}}
+        {{--$('#confirmDelete').on('click', function () {--}}
+        {{--    $.ajax({--}}
+        {{--        url: `/employees/${employeeIdToDelete}`, // Replace with your actual route--}}
+        {{--        method: 'DELETE',--}}
+        {{--        data: {--}}
+        {{--            _token: '{{ csrf_token() }}'--}}
+        {{--        },--}}
+        {{--        success: function (response) {--}}
+        {{--            alert(response.success);--}}
+        {{--            location.reload(); // Reload to update the table--}}
+        {{--        },--}}
+        {{--        error: function (xhr) {--}}
+        {{--            alert('Error: ' + xhr.responseJSON.message);--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--});--}}
     });
 
 
