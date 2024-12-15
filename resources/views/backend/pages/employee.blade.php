@@ -72,11 +72,7 @@
                                                 @csrf
                                                 <button href="" type="submit" class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 remove-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"><i data-lucide="trash-2" class="size-4"></i></button>
                                             </form>
-{{--                                            <button class="btn btn-danger delete-btn" data-id="{{ $employee->id }}">Delete</button>--}}
-
-                                            {{--                                            <a class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500" href="pages-account.html"><i data-lucide="eye" class="inline-block size-3"></i> </a>--}}
-{{--                                            <a href="#!" data-modal-target="addEmployeeModal" class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 edit-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"><i data-lucide="pencil" class="size-4"></i></a>--}}
-{{--                                            <a href="#!" data-modal-target="deleteModal" class="flex items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 remove-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"><i data-lucide="trash-2" class="size-4"></i></a>--}}
+                                            <a href="#!"  id="updateinformation" class="flex updateinformation items-center justify-center transition-all duration-200 ease-linear rounded-md size-8 edit-item-btn bg-slate-100 text-slate-500 hover:text-custom-500 hover:bg-custom-100 dark:bg-zink-600 dark:text-zink-200 dark:hover:bg-custom-500/20 dark:hover:text-custom-500"><i data-lucide="pencil" class="size-4"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -180,7 +176,8 @@
                     </div>
                     <div class="flex justify-end gap-2 mt-4">
 {{--                        <button type="reset" id="close-modal" data-modal-close="addEmployeeModal" class="text-red-500 bg-white btn hover:text-red-500 hover:bg-red-100 focus:text-red-500 focus:bg-red-100 active:text-red-500 active:bg-red-100 dark:bg-zink-600 dark:hover:bg-red-500/10 dark:focus:bg-red-500/10 dark:active:bg-red-500/10">Cancel</button>--}}
-                        <button type="submit" class="btn btn-primary">Add Employee</button>
+{{--                        <button type="submit" class="btn btn-primary">Add Employee</button>--}}
+                        <button type="submit" id="addNew" class="text-white btn btn-primary bg-custom-500 border-custom-500 hover:text-white hover:bg-custom-600 hover:border-custom-600 focus:text-white focus:bg-custom-600 focus:border-custom-600 focus:ring focus:ring-custom-100 active:text-white active:bg-custom-600 active:border-custom-600 active:ring active:ring-custom-100 dark:ring-custom-400/20 ">Add Employee</button>
                     </div>
                 </form>
             </div>
@@ -213,6 +210,62 @@
     <!--end delete modal-->
 
 
+
+    <!--start update Employee modal-->
+
+    <div class="modal fade" style="display: none" id="UpdateEmployeeModal" tabindex="-1" aria-labelledby="UpdateEmployeeLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="updateEmployeeForm">
+                @csrf
+                @method('PUT')
+                <input type="hidden" id="update-employee-id" name="employee_id"> <!-- Hidden Employee ID -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="UpdateEmployeeLabel">Update Employee</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="update-name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="update-name" name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-role" class="form-label">Role</label>
+                            <input type="text" class="form-control" id="update-role" name="role">
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="update-email" name="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="update-phone" name="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-address" class="form-label">Address</label>
+                            <textarea class="form-control" id="update-address" name="address"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-profession" class="form-label">Profession</label>
+                            <input type="text" class="form-control" id="update-profession" name="profession">
+                        </div>
+                        <div class="mb-3">
+                            <label for="update-joining-date" class="form-label">Joining Date</label>
+                            <input type="date" class="form-control" id="update-joining-date" name="joining_date">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Update Employee</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--end update Employee modal-->
+
+
 @endsection
 
 <script>
@@ -220,10 +273,15 @@
     document.addEventListener("DOMContentLoaded", function () {
         // Add Employee Modal
         const addEmployeeBtn = document.getElementById("addEmployeeBtn");
+        const updateinformation = document.getElementsByClassName("updateinformation");
         const addEmployeeModal = new bootstrap.Modal(document.getElementById("addEmployeeModal"));
+        const updateEmployeeModal = new bootstrap.Modal(document.getElementById("UpdateEmployeeModal"));
 
         addEmployeeBtn.addEventListener("click", function () {
             addEmployeeModal.show();
+        });
+        updateinformation.addEventListener("click", function () {
+            updateEmployeeModal.show();
         });
 
         // Delete Employee Modal
@@ -294,6 +352,59 @@
         {{--});--}}
     });
 
+
+    $(document).ready(function () {
+        // Open Update Modal and Populate Data
+        $('.update-btn').on('click', function () {
+            const employeeId = $(this).data('employee-id'); // Get employee ID
+            const updateModal = new bootstrap.Modal(document.getElementById('UpdateEmployeeModal'));
+
+            // Fetch Employee Data
+            $.ajax({
+                url: `/employees/${employeeId}/edit`,
+                method: 'GET',
+                success: function (employee) {
+                    // Populate Modal Fields with Employee Data
+                    $('#update-name').val(employee.name);
+                    $('#update-role').val(employee.role);
+                    $('#update-email').val(employee.email);
+                    $('#update-phone').val(employee.phone);
+                    $('#update-address').val(employee.address);
+                    $('#update-profession').val(employee.profession);
+                    $('#update-joining-date').val(employee.joining_date);
+
+                    // Open Modal
+                    updateModal.show();
+                },
+                error: function (xhr) {
+                    alert('Failed to fetch employee details: ' + xhr.responseJSON.message);
+                }
+            });
+        });
+
+        // Update Employee Form Submission
+        $('#updateEmployeeForm').on('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const employeeId = $('#update-employee-id').val(); // Hidden field for Employee ID
+
+            $.ajax({
+                url: `/employees/${employeeId}`,
+                method: 'PUT',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert(response.message);
+                    location.reload(); // Reload page to reflect changes
+                },
+                error: function (xhr) {
+                    alert('Error: ' + xhr.responseJSON.message);
+                }
+            });
+        });
+    });
 
 
 </script>

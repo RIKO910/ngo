@@ -60,7 +60,8 @@ class CustomerListController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $employee = Employee::findOrFail($id); // Adjust with your actual model
+        return response()->json($employee);
     }
 
     /**
