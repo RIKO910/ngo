@@ -356,6 +356,7 @@
     $(document).ready(function () {
         // Open Update Modal and Populate Data
         $('.update-btn').on('click', function () {
+            console.log('click')
             const employeeId = $(this).data('employee-id'); // Get employee ID
             const updateModal = new bootstrap.Modal(document.getElementById('UpdateEmployeeModal'));
 
