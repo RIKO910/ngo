@@ -84,6 +84,7 @@ class CustomerListController extends Controller
         return response()->json(['success' => 'Employee updated successfully!']);
     }
 
+
     /**
      * Remove the specified resource from storage.
      */
