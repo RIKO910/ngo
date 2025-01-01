@@ -16,5 +16,7 @@ Route::post('/add-employee', [\App\Http\Controllers\CustomerListController::clas
 Route::get('/employees/{id}/edit', [\App\Http\Controllers\CustomerListController::class, 'edit'])->name('employees.edit');
 
 
+
+
 //Route::post('/add-employee', [EmployeeController::class, 'store'])->name('employee.store');
 
