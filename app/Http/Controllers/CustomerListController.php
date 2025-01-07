@@ -82,7 +82,7 @@ class CustomerListController extends Controller
 
         $employee->update($request->all());
 
-        return response()->json(['success' => 'Employee updated successfully!']);
+        return response()->json(['success' => 'Employee updated successfully!!']);
     }
 
 
