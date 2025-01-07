@@ -69,6 +69,7 @@ class CustomerListController extends Controller
      */
     public function update(Request $request, Employee $employee)
     {
+
         $request->validate([
             'name' => 'required',
             'role' => 'required',
