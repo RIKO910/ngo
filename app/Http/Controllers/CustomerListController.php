@@ -15,6 +15,7 @@ class CustomerListController extends Controller
         $employees = Employee::all();
 
         return view('backend.pages.employee', compact('employees'));
+
     }
 
     /**
